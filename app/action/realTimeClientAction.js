@@ -21,8 +21,6 @@ function parseMessage(topic, message, actionContext) {
 
   if (message instanceof Uint8Array) {
     parsedMessage = JSON.parse(message).VP;
-    // fix oday format
-    parsedMessage.oday = parsedMessage.oday && parsedMessage.oday.replace(/-/g, '');
   } else {
     parsedMessage = message.VP;
   }
@@ -32,8 +30,8 @@ function parseMessage(topic, message, actionContext) {
     route: `HSL:${line}`,
     direction: parseInt(dir, 10) - 1,
     tripStartTime: startTime,
-    operatingDay: parsedMessage.oday && parsedMessage.oday !== 'XXX' ? parsedMessage.oday :
-      moment().format('YYYYMMDD'),
+    operatingDay: parsedMessage.oday && parsedMessage.oday !== 'XXX' ?
+      parsedMessage.oday : moment().format('YYYYMMDD'),
     mode,
     delay: parsedMessage.dl,
     next_stop: nextStop,
