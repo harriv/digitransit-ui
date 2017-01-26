@@ -32,6 +32,7 @@ class IndexPage extends React.Component {
     router: routerShape.isRequired,
     config: React.PropTypes.object.isRequired,
     piwik: React.PropTypes.object,
+    config: React.PropTypes.object.isRequired,
   };
 
   static propTypes = {

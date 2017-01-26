@@ -15,12 +15,14 @@ class SplashOrComponent extends React.Component {
     config: React.PropTypes.object.isRequired,
   };
 
-  componentWillMount = () => this.setState({
-    shouldShowIntro:
-    this.context.config.shouldShowIntro && getIntroShown() !== true &&
+  constructor(props, { config }) {
+    super();
+    this.state = { shouldShowIntro:
+      config.shouldShowIntro && getIntroShown() !== true &&
       // Do not show intro in mock mode
       !(isBrowser && window.mock),
-  })
+    };
+  }
 
   setIntroShown = () => {
     this.setState({ shouldShowIntro: false }, setIntroShown);

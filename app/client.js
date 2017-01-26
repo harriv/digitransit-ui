@@ -146,6 +146,7 @@ const callback = () => app.rehydrate(window.state, (err, context) => {
     raven: React.PropTypes.object,
     config: React.PropTypes.object,
     url: React.PropTypes.string,
+    config: React.PropTypes.object,
     headers: React.PropTypes.object,
   });
 

@@ -1,4 +1,5 @@
 import Fluxible from 'fluxible';
+
 import routes from './routes';
 import EndpointStore from './store/EndpointStore';
 import FavouriteLocationStore from './store/FavouriteLocationStore';
@@ -34,7 +35,7 @@ const appConstructor = (Config) => {
   app.plug({
     name: 'extra-context-plugin',
     plugContext: (options) => {
-      let { config, url, headers } = options;
+      let { url, headers, config } = options;
       return {
         plugComponentContext: (componentContext) => {
           // eslint-disable-next-line no-param-reassign
@@ -44,11 +45,18 @@ const appConstructor = (Config) => {
           // eslint-disable-next-line no-param-reassign
           componentContext.headers = headers;
         },
-
+        plugActionContext: (actionContext) => {
+          // eslint-disable-next-line no-param-reassign
+          actionContext.config = config;
+        },
+        plugStoreContext: (storeContext) => {
+          // eslint-disable-next-line no-param-reassign
+          storeContext.config = config;
+        },
         dehydrate: () => ({
-          config,
           url,
           headers,
+          config,
         }),
         rehydrate: (state) => {
           config = state.config;
